@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, shrink-to-fit=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./main.css">
+
+  <title>DQV 仲間おまかせ</title>
+
+
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div>
+      <p class="h4 pt-5 pb-5">ドラゴンクエストV 仲間キャラクターランダムセレクト</p>
+    </div>
+    <form>
+      <!-- キャラ選択数-->
+      <div class="form-row align-items-center">
+        <label for="headcount" class="col-form-label menu-label">選択キャラクター数:</label>
+        <div class="custom-control custom-control-inline">
+          <input class="form-control mb-2" type="number" min="1" max="47" value="8" id="headcount">
+        </div>
+      </div>
+      <!-- \キャラ選択数-->
+      <!-- 機種選択-->
+      <div class="form-row align-items-center">
+        <label for="console" class="col-form-label menu-label">機種:</label>
+        <div class="col-auto">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" name="console" id="sfc" value="0" checked>
+            <label class="custom-control-label" for="sfc">スーパーファミコン</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" name="console" id="ps2" value="1">
+            <label class="custom-control-label" for="ps2">プレイステーション2</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" name="console" id="handheld" value="2">
+            <label class="custom-control-label" for="handheld">ニンテンドーDS/Android/iOS</label>
+          </div>
+        </div>
+      </div>
+      <!-- \機種選択-->
+      <!-- ゴール-->
+      <div class="form-row align-items-center">
+        <label for="goal" class="col-form-label menu-label">加入予定箇所:</label>
+        <div class="col-auto">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" name="goal" id="kon" value="1" checked>
+            <label class="custom-control-label" for="kon">青年期前半まで</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" name="goal" id="nimzo" value="2">
+            <label class="custom-control-label" for="nimzo">青年期後半まで</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" name="goal" id="estark" value="3">
+            <label class="custom-control-label" for="estark">裏面まで</label>
+          </div>
+        </div>
+      </div>
+      <!-- \ゴール-->
+      <!-- 加入必須レベル範囲-->
+      <div class="form-row align-items-center">
+        <label for="lvRange" class="col-form-label menu-label">加入必須レベル:</label>
+        <div class="col-auto">
+          <div class="custom-control custom-control-inline">
+            <input class="form-control mb-2" type="number" min="1" max="99" value="1" name="lvRange" id="lvMin">
+          </div>
+          ～
+          <div class="custom-control custom-radio custom-control-inline">
+            <input class="form-control mb-2" type="number" min="1" max="99" value="99" name="lvRange" id="lvMax">
+          </div>
+        </div>
+      </div>
+      <!-- \加入必須レベル範囲-->
+      <!-- 装備グループ-->
+      <div class="form-row align-items-center">
+        <label for="group" class="col-form-label menu-label">装備グループ:</label>
+        <div class="col-auto" data-bind="foreach: group">
+          <!-- ko if: key === 'Q' -->
+          <br>
+          <!-- /ko -->
+          <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" class="custom-control-input" name="group" data-bind="value: key, attr:{'id': key}"
+              checked>
+            <label class="custom-control-label" data-bind="text: value, attr:{'for': key}"></label>
+          </div>
+        </div>
+      </div>
+      <!-- \装備グループ-->
+      <div class="form-row align-items-center mt-4">
+        <button type="button" class="btn btn-outline-primary" id="start">抽出する</button>
+        <button type="button" class="copy btn btn-outline-light" data-clipboard-target="#extract">📋</button>
+      </div>
+    </form>
+    <div class="row align-items-center mt-4">
+      <label class="col-form-label">抽出結果:</label>
+      <div class="col-auto">
+        <textarea class="form-control w-auto" id="extract" rows="1"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.min.js"
+    integrity="sha256-F8eQhL9KDGgaDitxiSyq6SnTCL0m67rt7niivBtH2rc=" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"
+    integrity="sha256-Tjl7WVgF1hgGMgUKZZfzmxOrtoSf8qltZ9wMujjGNQk=" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"
+    integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+  <script src="./main.js"></script>
+</body>
+
+</html>
