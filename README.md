@@ -17,3 +17,5 @@ Google Chrome (バージョン74で確認済)
 
 ## LICENSE
 MIT
+
+clipboard icon: (c) GitHub, Inc.
